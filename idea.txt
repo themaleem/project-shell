@@ -1,7 +1,7 @@
 API endpoints lists
 
 Authentiction system
-        /auth/registration
+        domain.com/auth/registration
                 User is able to register for the app with thier username, email(if they so choose), password1 and password2 by means of a POST request
 
                 After registration, a Token is returned in the response object 
@@ -10,7 +10,7 @@ Authentiction system
                 "key": "e15cc37e402a61de5t0b73144092afa5595d7e6d"
                 }
 
-        /rest-auth/login
+        domain.com/rest-auth/login
                 User is able to login to the app with the username and password supplied during registration by means of a POST request
 
                 After login, a Token is returned in the response object 
@@ -21,5 +21,5 @@ Authentiction system
 
                 representing the User in subsequent requests 
 
-        /rest-auth/logout
+        domain.com/rest-auth/logout
                 This view effects use logout and User session ends 
