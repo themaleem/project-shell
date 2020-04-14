@@ -45,3 +45,4 @@ class Draft(Postable):
 class Response(models.Model):
     body = models.TextField()
     post = models.ForeignKey(to="Post",on_delete=models.CASCADE, related_name="responses")
+    owner = models.ForeignKey(to=User,on_delete=models.CASCADE)
