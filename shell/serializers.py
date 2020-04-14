@@ -10,15 +10,15 @@ class PostResponseSerializer(serializers.ModelSerializer):
             'body',
         ]
 
-class ResponseSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model=Response
-        fields=[
-            'id',
-            'url',
-            'body',
-            'post_id'
-        ]
+# class ResponseSerializer(serializers.HyperlinkedModelSerializer):
+#     class Meta:
+#         model=Response
+#         fields=[
+#             'id',
+#             'url',
+#             'body',
+#             'post_id'
+#         ]
 class PostSerializer(serializers.HyperlinkedModelSerializer):
     owner= serializers.ReadOnlyField(source="owner.username")
     created_at=serializers.DateTimeField()
