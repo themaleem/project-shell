@@ -11,7 +11,7 @@ class Profile(models.Model):
 
     following = models.ManyToManyField(User, related_name="following_profile", blank=True)
 
-    status = models.TextField(max_length=100, null=True, blank=True, default="Yeah! I am at HUSKY!")
+    status = models.TextField(max_length=100, null=True, blank=True, default="Love and Light!")
     avatar = models.ImageField(upload_to='')
     one_word_description = models.CharField(max_length=15)
     bio = models.TextField()
