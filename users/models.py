@@ -6,39 +6,24 @@ import string,random
 
 # function to generate a random value
 def generate_username(size=7, chars=string.ascii_uppercase + string.digits):
-    return ''.join(random.choice(chars) for _ in range(size))
+    return 'user'+''.join(random.choice(chars) for _ in range(size))
 class Profile(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     generated_username = models.CharField(max_length=20)
-    followers = models.ManyToManyField(User, related_name="followers_profile", blank=True)
-
-    following = models.ManyToManyField(User, related_name="following_profile", blank=True)
-
     status = models.TextField(max_length=100, null=True, blank=True, default="Love and Light!")
-    avatar = models.ImageField(upload_to='')
+    avatar = models.ImageField(upload_to='avis/',blank=True)
     one_word_description = models.CharField(max_length=15)
     bio = models.TextField()
+    date_joined = models.DateTimeField(auto_now_add=True)
 
 
     class Meta:
         verbose_name = 'Profile'
         verbose_name_plural = 'Profiles'
 
-    def get_number_of_followers(self):
-        if self.followers.count():
-            return self.followers.count()
-        else:
-            return 0
-
-    def get_number_of_following(self):
-        if self.following.count():
-            return self.following.count()
-        else:
-            return 0
-
     def save(self, *args, **kwargs):
-        self.bet_code = generate_username()
+        self.generated_username = generate_username()
         super(Profile, self).save(*args, **kwargs)
 
     def __str__(self):

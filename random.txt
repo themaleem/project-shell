@@ -4,3 +4,6 @@ Random ideas and improvement goes here
 you need to create multiple apps........it makes the application more maintainable.....
 
 why you dey sstingyy with creating .py files naaa
+
+
+why is the need for the active field on the Comments model?

@@ -11,11 +11,11 @@ class FeedManager(models.Manager):
         return super().get_queryset()
 
     def published(self):
-        # this gives all the bets that are currently playing...ie matches that are currently playing
+        # this gives all the published feeds
         return super().get_queryset().filter(is_published=True)
 
     def draft(self):
-        # this gives all the bets that are currently playing...ie matches that are currently playing
+        # this gives all the feeds that aren't published 
         return super().get_queryset().filter(is_published=False)
 
 class Feed(models.Model):

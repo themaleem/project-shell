@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 
 class Diary(models.Model):
   title = models.CharField(max_length=500)
-  user = models.ForeignKey(User)
+  body = models.TextField()
+  user = models.ForeignKey(User,on_delete=models.CASCADE)
 
   class Meta:
       verbose_name = 'Diary'
