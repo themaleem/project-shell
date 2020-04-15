@@ -1,11 +1,9 @@
 from django.urls import path,include
 from rest_framework.routers import DefaultRouter
-from .views import PostViewset,ResponseViewset
+from .views import FeedViewset
 router=DefaultRouter()
-router.register('posts',PostViewset)
-router.register('responses',ResponseViewset)
+router.register('feeds',FeedViewset)
 urlpatterns = [
-    # path('',router.urls)
 ]
 urlpatterns+= router.urls
 

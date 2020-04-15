@@ -27,11 +27,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # my apps
     'users',
+    'shell',
     # 3rd party packages
     'corsheaders',  #cors headers  stuff
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
+    'taggit',
+    'taggit_serializer',
     # django-rest-auth registration
     'django.contrib.sites',
     'allauth',

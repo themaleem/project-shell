@@ -14,7 +14,9 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             ]
 
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
-    user=UserSerializer()
+    user = serializers.ReadOnlyField(source='user.username')
+    date_joined=serializers.DateTimeField(read_only=True)
+    avatar=serializers.ImageField(allow_empty_file=True, use_url=True)
     class Meta:
         model = Profile
         fields = [
