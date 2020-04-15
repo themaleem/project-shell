@@ -20,6 +20,11 @@ class Profile(models.Model):
     one_word_description = models.CharField(max_length=15)
     bio = models.TextField()
 
+
+    class Meta:
+        verbose_name = 'Profile'
+        verbose_name_plural = 'Profiles'
+
     def get_number_of_followers(self):
         if self.followers.count():
             return self.followers.count()
