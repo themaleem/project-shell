@@ -32,8 +32,24 @@ class CommentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Comment
         fields=[
+            'id',
+            'url',
             'creator',
             'feed',
+            'comment_text',
+            'created',
+            'active'
+        ]
+
+class FeedCommentsSerializer(serializers.ModelSerializer):
+    created = serializers.DateTimeField(read_only=True)
+    active =serializers.BooleanField(default=True,read_only=True)
+
+    class Meta:
+        model = Comment
+        fields=[
+            'feed_id',
+            'creator',
             'comment_text',
             'created',
             'active'
