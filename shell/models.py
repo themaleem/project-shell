@@ -42,7 +42,7 @@ class Feed(models.Model):
         super(Feed,self).save(*args,**kwargs)
 
 
-    def get_comments_count(self):
+    def comments_count(self):
         return self.comments.filter(active=True).count()
 
     class Meta:
@@ -66,4 +66,4 @@ class Comment(models.Model):
 
 
     def __str__(self):
-        return '{} added a comment on {}'.format(self.creator,self.post)
+        return '{} added a comment on {}'.format(self.creator,self.feed)

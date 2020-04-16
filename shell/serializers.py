@@ -20,4 +20,21 @@ class FeedSerializer(TaggitSerializer,serializers.HyperlinkedModelSerializer):
             'created',
             'status',
             'tags',
+            'comments_count'
+        ]
+
+class CommentSerializer(serializers.HyperlinkedModelSerializer):
+    creator = serializers.ReadOnlyField(source='creator.username')
+    feed = serializers.SlugRelatedField(queryset=Feed.objects.all(), slug_field="title")
+    created = serializers.DateTimeField(read_only=True)
+    active =serializers.BooleanField(default=True,read_only=True)
+
+    class Meta:
+        model = Comment
+        fields=[
+            'creator',
+            'feed',
+            'comment_text',
+            'created',
+            'active'
         ]
