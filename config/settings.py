@@ -13,7 +13,7 @@ SECRET_KEY = '689$_jo_yl8xar4x6+40l&o)we-6-zq#vlbio0qia9k0hhrey^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['project-shell.herokuapp.com','127.0.0.1']
 
 
 # Application definition
@@ -46,6 +46,7 @@ SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -53,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 
 ROOT_URLCONF = 'config.urls'
 
@@ -129,3 +131,9 @@ MEDIA_URL ='/media/'
 # Django rest auth settings
 ACCOUNT_EMAIL_REQUIRED = False 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+import dj_database_url
+
+prod_db  =  dj_database_url.config(conn_max_age=500)
+
+DATABASES['default'].update(prod_db)
