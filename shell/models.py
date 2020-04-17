@@ -27,7 +27,7 @@ class Feed(models.Model):
     # We have added the unique_for_date parameter to this field so that we can build URLs for posts using
     # their publish date and slug . Django will prevent multiple posts from having the same slug for a given date
     slug = models.SlugField(unique_for_date='publish')
-    author = models.ForeignKey(User,on_delete=models.CASCADE,related_name='user_feeds')
+    author = models.ForeignKey(User,on_delete=models.CASCADE,related_name='user_feeds',null=True,blank=True)
     body = models.TextField()
     is_published = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -54,7 +54,7 @@ class Feed(models.Model):
         return self.title
 
 class Comment(models.Model):
-    creator = models.ForeignKey(User,on_delete=models.CASCADE)
+    creator = models.ForeignKey(User,on_delete=models.CASCADE,null=True,blank=True)
     feed = models.ForeignKey(Feed,related_name='comments',on_delete=models.CASCADE)
     comment_text = models.TextField()
     created = models.DateTimeField(auto_now_add=True)

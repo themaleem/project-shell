@@ -7,9 +7,9 @@ from rest_framework.decorators import action
 from django.contrib.auth.models import User
 from rest_framework.response import Response
 
-# get the anonymous user instance
-# to prefill it in post requests
-anon=User.objects.get(username='anonymous')
+# # get the anonymous user instance
+# # to prefill it in post requests
+# anon=User.objects.get(username='anonymous')
 
 class FeedViewset(viewsets.ModelViewSet):
     queryset=Feed.objects.all()
@@ -44,7 +44,7 @@ class FeedViewset(viewsets.ModelViewSet):
 
     def perform_create(self,serializer):
         if self.request.user.is_anonymous:
-            return serializer.save(author=anon)
+            return serializer.save()
         return serializer.save(author=self.request.user)
 
 class CommentListView(generics.ListAPIView):
