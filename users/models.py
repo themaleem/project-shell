@@ -4,8 +4,9 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 import string,random
 
+chars = string.ascii_letters + string.digits
 # function to generate a random value
-def generate_username(size=7, chars=string.ascii_uppercase + string.digits):
+def generate_username(size=7, chars=chars):
     return 'user'+''.join(random.choice(chars) for _ in range(size))
 class Profile(models.Model):
 
@@ -21,10 +22,14 @@ class Profile(models.Model):
     class Meta:
         verbose_name = 'Profile'
         verbose_name_plural = 'Profiles'
-
+    
     def save(self, *args, **kwargs):
         self.generated_username = generate_username()
         super(Profile, self).save(*args, **kwargs)
+
+    @property
+    def diaries(self):
+      return self.user.diaries.get_queryset()
 
     def __str__(self):
         return self.user.username

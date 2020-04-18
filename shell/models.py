@@ -67,3 +67,17 @@ class Comment(models.Model):
 
     def __str__(self):
         return '{} added a comment on {}'.format(self.creator,self.feed)
+
+class Diary(models.Model):
+    owner = models.ForeignKey(User,on_delete=models.CASCADE,related_name='diaries')
+    title = models.CharField(max_length=200)
+    body = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Diary'
+        verbose_name_plural = 'Diaries'
+
+    def __str__(self):
+        return '{} added a Diary {}'.format(self.user.username,self.title)

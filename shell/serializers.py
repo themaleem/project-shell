@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Feed,Comment
+from .models import Feed,Comment,Diary
 from taggit_serializer.serializers import TagListSerializerField,TaggitSerializer
 
 class FeedSerializer(TaggitSerializer,serializers.HyperlinkedModelSerializer):
@@ -53,4 +53,21 @@ class FeedCommentsSerializer(serializers.ModelSerializer):
             'comment_text',
             'created',
             'active'
+        ]
+
+class DiarySerializer(serializers.HyperlinkedModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
+    created = serializers.DateTimeField(read_only=True)
+    updated = serializers.DateTimeField(read_only=True)
+    
+    class Meta:
+        model=Diary
+        fields=[
+            'id',
+            'url',
+            'owner',
+            'title',
+            'body',
+            'created',
+            'updated'
         ]

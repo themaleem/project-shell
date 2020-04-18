@@ -27,5 +27,6 @@ class ProfileSerializer(serializers.HyperlinkedModelSerializer):
             'status', 
             'avatar',
             'one_word_description',
-            'date_joined'
+            'date_joined',
+            'diaries'
             ]
