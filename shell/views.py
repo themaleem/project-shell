@@ -31,11 +31,11 @@ class FeedViewset(viewsets.ModelViewSet):
         feed=self.get_object()
         data=request.data
         data['feed'] = feed
-        print("******************")
-        print(data)
-        print("******************")
+        serializer_context = {
+            'request': request,
+        }
         data['creator'] = self.request.user.id
-        serializer=CommentSerializer(data=data)
+        serializer=CommentSerializer(data=data,context=serializer_context)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data,status=201)

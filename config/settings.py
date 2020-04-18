@@ -29,7 +29,7 @@ INSTALLED_APPS = [
     'users',
     'shell',
     # 3rd party packages
-    'corsheaders',  #cors headers  stuff
+    'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'allauth',
     'allauth.account',
+    'allauth.socialaccount',  
     'rest_auth.registration',
 ]
 
@@ -137,6 +138,14 @@ ACCOUNT_EMAIL_REQUIRED = False
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}
 
 import dj_database_url
 
