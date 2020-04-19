@@ -1,11 +1,14 @@
 from django.shortcuts import render
-from .models import Feed,Comment
-from .serializers import FeedSerializer,CommentSerializer,FeedCommentsSerializer
+from .models import Feed,Comment,Diary
+from .serializers import FeedSerializer,CommentSerializer,FeedCommentsSerializer,DiarySerializer
 
 from rest_framework import viewsets,decorators,generics,status
 from rest_framework.decorators import action
 from django.contrib.auth.models import User
 from rest_framework.response import Response
+from shell import custompermissions
+from rest_framework import permissions 
+from rest_framework.reverse import reverse
 
 # # get the anonymous user instance
 # # to prefill it in post requests
@@ -60,3 +63,24 @@ class CommentDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     name = 'comment-detail'
+
+class DiaryListView(generics.ListCreateAPIView):
+    queryset= Diary.objects.all()
+    serializer_class= DiarySerializer
+    lookup_field = 'pk'
+    name="diary-list"
+
+    # Only authenticated users can create
+    def perform_create(self,serializer):
+        return serializer.save(author=self.request.user)
+
+class DiaryDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset= Diary.objects.all()
+    serializer_class= DiarySerializer
+    lookup_field = 'pk'
+    name="diary-detail"
+
+    permission_classes = (
+        permissions.IsAuthenticatedOrReadOnly,
+        custompermissions.IsCurrentUserOwnerOrReadOnly,
+        )

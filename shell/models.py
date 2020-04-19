@@ -80,4 +80,4 @@ class Diary(models.Model):
         verbose_name_plural = 'Diaries'
 
     def __str__(self):
-        return '{} added a Diary {}'.format(self.user.username,self.title)
+        return f'{self.title.upper()} by {self.owner.username}'

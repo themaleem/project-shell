@@ -5,7 +5,7 @@ from taggit_serializer.serializers import TagListSerializerField,TaggitSerialize
 class FeedSerializer(TaggitSerializer,serializers.HyperlinkedModelSerializer):
     author=serializers.ReadOnlyField(source='author.username')
     is_published=serializers.BooleanField(default=False,read_only=True)
-    created=serializers.BooleanField(default=False,read_only=True)
+    created=serializers.DateTimeField(read_only=True)
     tags = TagListSerializerField()
     # serializer for the category model
     class Meta:
