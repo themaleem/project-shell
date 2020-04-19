@@ -26,7 +26,7 @@ class Feed(models.Model):
     title = models.CharField(max_length=200)
     # We have added the unique_for_date parameter to this field so that we can build URLs for posts using
     # their publish date and slug . Django will prevent multiple posts from having the same slug for a given date
-    slug = models.SlugField(unique_for_date='publish')
+    slug = models.SlugField(unique_for_date='created')
     author = models.ForeignKey(User,on_delete=models.CASCADE,related_name='user_feeds',null=True,blank=True)
     body = models.TextField()
     is_published = models.BooleanField(default=True)
