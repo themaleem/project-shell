@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Profile,User
+from shell.serializers import DiarySerializer,FeedSerializer
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -17,6 +18,10 @@ class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     user = serializers.ReadOnlyField(source='user.username')
     date_joined=serializers.DateTimeField(read_only=True)
     avatar=serializers.ImageField(allow_empty_file=True, use_url=True)
+    user_published=FeedSerializer(many=True)
+    user_dafts=FeedSerializer(many=True)
+    diaries=DiarySerializer(many=True)
+
     class Meta:
         model = Profile
         fields = [
@@ -28,5 +33,7 @@ class ProfileSerializer(serializers.HyperlinkedModelSerializer):
             'avatar',
             'one_word_description',
             'date_joined',
-            'diaries'
+            'user_published',
+            'user_dafts',
+            'diaries',
             ]

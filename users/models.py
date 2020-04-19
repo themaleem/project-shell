@@ -28,6 +28,14 @@ class Profile(models.Model):
         super(Profile, self).save(*args, **kwargs)
 
     @property
+    def user_published(self):
+      return self.user.user_feeds.published
+
+    @property
+    def user_dafts(self):
+      return self.user.user_feeds.draft
+
+    @property
     def diaries(self):
       return self.user.diaries.get_queryset()
 
