@@ -70,9 +70,14 @@ class DiaryListView(generics.ListCreateAPIView):
     lookup_field = 'pk'
     name="diary-list"
 
+    permission_classes = (
+        permissions.IsAuthenticatedOrReadOnly,
+        custompermissions.IsCurrentUserOwnerOrReadOnly,
+        )
+   
     # Only authenticated users can create
     def perform_create(self,serializer):
-        return serializer.save(author=self.request.user)
+        return serializer.save(owner=self.request.user)
 
 class DiaryDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset= Diary.objects.all()

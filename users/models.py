@@ -10,7 +10,7 @@ def generate_username(size=7, chars=chars):
     return 'user'+''.join(random.choice(chars) for _ in range(size))
 class Profile(models.Model):
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE,related_name='profile')
     generated_username = models.CharField(max_length=20)
     status = models.TextField(max_length=100, null=True, blank=True, default="Love and Light!")
     avatar = models.ImageField(upload_to='avis/',blank=True)
@@ -29,11 +29,11 @@ class Profile(models.Model):
 
     @property
     def user_published(self):
-      return self.user.user_feeds.published
+      return self.user.user_feeds.filter(author=self.user).filter(is_published=True)
 
     @property
-    def user_dafts(self):
-      return self.user.user_feeds.draft
+    def user_drafts(self):
+      return self.user.user_feeds.filter(author=self.user).filter(is_published=False)
 
     @property
     def diaries(self):
