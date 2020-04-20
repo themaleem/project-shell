@@ -27,9 +27,10 @@ class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     avatar=serializers.ImageField(allow_empty_file=True, use_url=True)
     user_published = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='feed-detail')
     user_drafts = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='feed-detail')
+    diaries = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='diary-detail')
+    generated_username=serializers.ReadOnlyField()
     # user_published=FeedSerializer(many=True)
     # user_drafts=FeedSerializer(many=True)
-    diaries = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='diary-detail')
     # diaries=DiarySerializer(many=True)
 
     class Meta:
@@ -47,3 +48,4 @@ class ProfileSerializer(serializers.HyperlinkedModelSerializer):
             'user_drafts',
             'diaries',
             ]
+        
