@@ -22,10 +22,10 @@ class CommentSerializer(serializers.HyperlinkedModelSerializer):
 
 class FeedSerializer(TaggitSerializer,serializers.HyperlinkedModelSerializer):
     author=serializers.ReadOnlyField(source='author.username')
-    is_published=serializers.BooleanField(default=False,read_only=True)
+    is_published=serializers.BooleanField(default=True,read_only=True)
     created=serializers.DateTimeField(read_only=True)
     tags = TagListSerializerField()
-    comments= CommentSerializer(many=True)
+    comments= CommentSerializer(many=True,read_only=True)
     # serializer for the category model
     class Meta:
         model = Feed
