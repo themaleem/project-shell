@@ -9,16 +9,20 @@ from rest_framework.response import Response
 from shell import custompermissions
 from rest_framework import permissions 
 from rest_framework.reverse import reverse
-
-# # get the anonymous user instance
-# # to prefill it in post requests
-# anon=User.objects.get(username='anonymous')
+from django_filters import rest_framework as dfilters
 
 class FeedViewset(viewsets.ModelViewSet):
     queryset=Feed.objects.all()
     serializer_class=FeedSerializer
     lookup_field = 'pk'
-
+    filter_fields=(
+        'title',
+        )
+    search_fields=(
+        '^title',
+        '^body',
+        )
+        
     @action(detail=True,methods=["GET"])
     def comments(self,request,pk=None):
         feed=self.get_object()
